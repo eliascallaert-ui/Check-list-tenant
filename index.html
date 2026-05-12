@@ -226,11 +226,20 @@ body { background: var(--cream); color: var(--bark); font-family: var(--font-b);
 </div>
 
 <script>
-// Le script de gestion de la checklist reste le même
-const ITEMS = { arrivee: ['a1','a2'], vie: ['v1'], depart: ['d1'] };
+// Liste complète de tes IDs pour que la barre de progression soit juste
+const ITEMS = {
+  arrivee: ['a1','a2','a3','a4','a5','a6','a7','a8','a9','a10','a11','a12','a13','a14'],
+  vie:     ['v1','v2','v3','v4','v5','v6','v7','v8','v9'],
+  depart:  ['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12'],
+};
 
-function getState() { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); }
-function setState(s) { localStorage.setItem('checklist_boileau', JSON.stringify(s)); }
+function getState() { 
+  try { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); } catch { return {}; }
+}
+
+function setState(s) { 
+  try { localStorage.setItem('checklist_boileau', JSON.stringify(s)); } catch {}
+}
 
 function toggle(el) {
   const id = el.dataset.id;
@@ -243,12 +252,18 @@ function toggle(el) {
 
 function updateProgress() {
   const s = getState();
-  const allIds = Object.values(ITEMS).flat();
+  const allIds = [...ITEMS.arrivee, ...ITEMS.vie, ...ITEMS.depart];
   const done = allIds.filter(id => s[id]).length;
   const total = allIds.length;
   const pct = Math.round(done / total * 100) || 0;
+  
   document.getElementById('pct').textContent = pct + '%';
   document.getElementById('fill').style.width = pct + '%';
+  
+  // Met à jour les compteurs sur les onglets
+  if(document.getElementById('cnt-arrivee')) document.getElementById('cnt-arrivee').textContent = ITEMS.arrivee.filter(id => s[id]).length + '/' + ITEMS.arrivee.length;
+  if(document.getElementById('cnt-vie')) document.getElementById('cnt-vie').textContent = ITEMS.vie.filter(id => s[id]).length + '/' + ITEMS.vie.length;
+  if(document.getElementById('cnt-depart')) document.getElementById('cnt-depart').textContent = ITEMS.depart.filter(id => s[id]).length + '/' + ITEMS.depart.length;
 }
 
 function switchTab(name, btn) {
@@ -258,7 +273,19 @@ function switchTab(name, btn) {
   document.getElementById('panel-' + name).classList.add('active');
 }
 
-updateProgress();
+function resetAll() {
+  if (confirm('Réinitialiser toute la checklist ?')) {
+    localStorage.removeItem('checklist_boileau');
+    location.reload();
+  }
+}
+
+// Au chargement, on applique l'état sauvegardé
+window.onload = () => {
+  const s = getState();
+  document.querySelectorAll('.cl-item').forEach(el => {
+    if (s[el.dataset.id]) el.classList.add('checked');
+  });
+  updateProgress();
+};
 </script>
-</body>
-</html>
