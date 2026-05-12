@@ -7,78 +7,71 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sage: #7D9B76; --sage-dark: #5A7554; --sage-light: #B5CCAF; --sage-pale: #EAF0E8;
-  --beige: #F5EFE4; --beige-dark: #E8DCCA; --cream: #FDFAF5; --terra: #C17F5E;
-  --terra-light:#F2E0D4; --umber: #6B4F3A; --bark: #3D2B1F; --fog: #8E9E8A; --white: #FFFFFF;
-  --font-d: 'Playfair Display', Georgia, serif; --font-b: 'Jost', sans-serif;
+  --sage:       #7D9B76;
+  --sage-dark:  #5A7554;
+  --sage-light: #B5CCAF;
+  --sage-pale:  #EAF0E8;
+  --beige:      #F5EFE4;
+  --beige-dark: #E8DCCA;
+  --cream:      #FDFAF5;
+  --terra:      #C17F5E;
+  --terra-light:#F2E0D4;
+  --umber:      #6B4F3A;
+  --bark:       #3D2B1F;
+  --fog:        #8E9E8A;
+  --white:      #FFFFFF;
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'Jost', sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
 body { background: var(--cream); color: var(--bark); font-family: var(--font-b); font-weight: 300; min-height: 100vh; }
 
-/* ── BARRE DE RETOUR ── */
-.top-nav { background: var(--white); border-bottom: 1px solid var(--beige-dark); padding: 0.8rem; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; }
-.back-btn { text-decoration: none; color: var(--sage-dark); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 1.2rem; border: 1px solid var(--sage-light); border-radius: 2rem; transition: 0.3s; }
-.back-btn:hover { background: var(--sage-pale); }
+.top-bar { background: var(--white); border-bottom: 1px solid var(--beige-dark); padding: 0.8rem; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; }
+.back-link { text-decoration: none; color: var(--sage-dark); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--sage-light); padding: 0.4rem 1rem; border-radius: 2rem; }
 
-/* ── HEADER ── */
-.header { background: var(--bark); padding: 2rem 1.5rem 0; text-align: center; position: relative; overflow: hidden; }
-.header-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-.header h1 { font-family: var(--font-d); font-size: clamp(2rem,6vw,3.5rem); color: var(--beige); font-weight: 400; }
+.header { background: var(--bark); padding: 2rem 1.5rem; text-align: center; color: var(--beige); }
+.header h1 { font-family: var(--font-d); font-size: 2.5rem; font-weight: 400; }
 .header h1 em { color: var(--sage-light); font-style: italic; }
 
-/* ── PROGRESS BAR ── */
-.progress-wrap { background: rgba(255,255,255,.07); border-radius: 20px 20px 0 0; padding: 1.5rem 2rem 1rem; margin-top: 1rem; }
-.progress-labels { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: .6rem; }
-.progress-pct { font-size: 2.2rem; font-weight: 600; color: var(--sage-light); font-family: var(--font-d); }
-.progress-track { height: 10px; background: rgba(255,255,255,.1); border-radius: 10px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--sage-dark), var(--sage-light)); width: 0%; transition: 0.5s; }
+.progress-wrap { max-width: 700px; margin: 1rem auto 0; padding: 0 1rem; }
+.progress-labels { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.progress-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--sage-light); width: 0%; transition: width 0.4s; }
 
-/* ── TABS ── */
-.tabs { display: flex; border-bottom: 1px solid var(--beige-dark); background: var(--white); position: sticky; top: 51px; z-index: 50; overflow-x: auto; }
-.tab { flex: 1; padding: 1rem; text-align: center; cursor: pointer; font-size: .75rem; text-transform: uppercase; color: var(--fog); border: none; background: none; border-bottom: 3px solid transparent; white-space: nowrap; }
-.tab.active { color: var(--sage-dark); border-bottom-color: var(--sage); font-weight: 600; }
+.tabs { display: flex; background: var(--white); border-bottom: 1px solid var(--beige-dark); position: sticky; top: 48px; z-index: 50; }
+.tab { flex: 1; padding: 1rem; text-align: center; cursor: pointer; border: none; background: none; color: var(--fog); font-size: 0.8rem; text-transform: uppercase; }
+.tab.active { color: var(--sage-dark); border-bottom: 3px solid var(--sage); font-weight: 600; }
 
-/* ── PANELS ── */
-.panels { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.panels { max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
 .panel { display: none; }
-.panel.active { display: block; animation: fadeIn .3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.panel.active { display: block; }
 
-.cl-group-label { font-size: .7rem; font-weight: 600; text-transform: uppercase; color: var(--sage-dark); margin: 1.5rem 0 .8rem; display: flex; align-items: center; gap: 10px; }
+.cl-group-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--sage-dark); margin: 1.5rem 0 0.8rem; display: flex; align-items: center; gap: 10px; }
 .cl-group-label::after { content: ''; flex: 1; height: 1px; background: var(--beige-dark); }
 
-/* ── ITEMS ── */
-.cl-item { display: flex; align-items: flex-start; gap: 1rem; background: var(--white); border: 1px solid var(--beige-dark); border-radius: 12px; padding: 1rem; margin-bottom: .6rem; cursor: pointer; transition: 0.2s; }
-.cl-item.checked { background: var(--sage-pale); border-color: var(--sage-light); }
-.cl-checkbox { width: 22px; height: 22px; border: 2px solid var(--beige-dark); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--white); }
+.cl-item { display: flex; gap: 1rem; background: var(--white); border: 1px solid var(--beige-dark); border-radius: 12px; padding: 1rem; margin-bottom: 0.6rem; cursor: pointer; }
+.cl-item.checked { background: var(--sage-pale); border-color: var(--sage-light); opacity: 0.8; }
+.cl-checkbox { width: 22px; height: 22px; border: 2px solid var(--beige-dark); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .cl-item.checked .cl-checkbox { background: var(--sage); border-color: var(--sage); }
-.cl-check-icon { color: var(--white); display: none; font-size: 0.8rem; }
+.cl-check-icon { color: white; display: none; font-size: 0.8rem; }
 .cl-item.checked .cl-check-icon { display: block; }
-.cl-text { font-size: .92rem; color: var(--bark); }
-.cl-en { display: block; font-size: .78rem; color: var(--fog); font-style: italic; }
+.cl-text { font-size: 0.95rem; }
+.cl-en { display: block; font-size: 0.8rem; color: var(--fog); font-style: italic; }
 
-.reset-btn { display: block; margin: 2rem auto; padding: 0.6rem 1.5rem; background: none; border: 1px solid var(--beige-dark); border-radius: 2rem; color: var(--fog); cursor: pointer; }
-
-@media(max-width:480px) { .tabs { top: 47px; } }
+.reset-btn { display: block; margin: 2rem auto; padding: 0.6rem 1.5rem; border: 1px solid var(--beige-dark); border-radius: 2rem; background: none; color: var(--fog); cursor: pointer; }
 </style>
 </head>
 <body>
 
-<nav class="top-nav">
-  <a href="https://eliascallaert-ui.github.io/House-Guide/" class="back-btn">🏠 Retour au Guide</a>
-</nav>
+<div class="top-bar">
+  <a href="https://eliascallaert-ui.github.io/House-Guide/" class="back-link">🏠 Retour au Guide</a>
+</div>
 
 <div class="header">
-  <div class="header-content">
-    <h1>Check-list <em>Locataire</em></h1>
-    <div class="progress-wrap">
-      <div class="progress-labels">
-        <span class="progress-pct" id="pct">0%</span>
-        <span style="color:var(--fog); font-size:0.8rem">Progression du séjour</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
-    </div>
+  <h1>Check-list <em>Locataire</em></h1>
+  <div class="progress-wrap">
+    <div class="progress-labels"><span id="pct">0%</span><span>Completed</span></div>
+    <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
   </div>
 </div>
 
@@ -89,36 +82,25 @@ body { background: var(--cream); color: var(--bark); font-family: var(--font-b);
 </div>
 
 <div class="panels">
-  <!-- ARRIVÉE -->
   <div class="panel active" id="panel-arrivee">
-    <div class="cl-group-label">🔑 Clés & Accès</div>
-    <div class="cl-item" onclick="toggle(this)" data-id="a1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Les 2 clés reçues</span><span class="cl-en">Both keys received</span></div></div>
-    <div class="cl-item" onclick="toggle(this)" data-id="a2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">WiFi connecté (LANgoustine)</span><span class="cl-en">WiFi connected</span></div></div>
-    
-    <div class="cl-group-label">🛏️ Logement</div>
-    <div class="cl-item" onclick="toggle(this)" data-id="a3"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Chambre vérifiée</span><span class="cl-en">Room checked</span></div></div>
-    <div class="cl-item" onclick="toggle(this)" data-id="a4"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Tour de l'appartement effectué</span><span class="cl-en">Tour of apartment done</span></div></div>
+    <div class="cl-group-label">🔑 Accès</div>
+    <div class="cl-item" onclick="toggle(this)" data-id="a1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div><span class="cl-text">Clés reçues</span><span class="cl-en">Keys received</span></div></div>
+    <div class="cl-item" onclick="toggle(this)" data-id="a2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div><span class="cl-text">WiFi connecté</span><span class="cl-en">WiFi connected</span></div></div>
   </div>
-
-  <!-- VIE -->
   <div class="panel" id="panel-vie">
     <div class="cl-group-label">🍳 Quotidien</div>
-    <div class="cl-item" onclick="toggle(this)" data-id="v1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Cuisine nettoyée</span><span class="cl-en">Kitchen cleaned</span></div></div>
-    <div class="cl-item" onclick="toggle(this)" data-id="v2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Poubelles triées</span><span class="cl-en">Waste sorted</span></div></div>
+    <div class="cl-item" onclick="toggle(this)" data-id="v1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div><span class="cl-text">Cuisine propre</span><span class="cl-en">Kitchen clean</span></div></div>
   </div>
-
-  <!-- DÉPART -->
   <div class="panel" id="panel-depart">
-    <div class="cl-group-label">🏁 Fin de séjour</div>
-    <div class="cl-item" onclick="toggle(this)" data-id="d1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Frigo vidé</span><span class="cl-en">Fridge empty</span></div></div>
-    <div class="cl-item" onclick="toggle(this)" data-id="d2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Clés rendues à Eva ou Elias</span><span class="cl-en">Keys returned</span></div></div>
+    <div class="cl-group-label">🏁 Fin</div>
+    <div class="cl-item" onclick="toggle(this)" data-id="d1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div><span class="cl-text">Clés rendues</span><span class="cl-en">Keys returned</span></div></div>
   </div>
 </div>
 
-<button class="reset-btn" onclick="resetAll()">↺ Réinitialiser la checklist</button>
+<button class="reset-btn" onclick="resetAll()">Réinitialiser</button>
 
 <script>
-const ITEMS = { arrivee: ['a1','a2','a3','a4'], vie: ['v1','v2'], depart: ['d1','d2'] };
+const ITEMS = { arrivee: ['a1','a2'], vie: ['v1'], depart: ['d1'] };
 
 function getState() { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); }
 function setState(s) { localStorage.setItem('checklist_boileau', JSON.stringify(s)); }
@@ -136,8 +118,7 @@ function updateProgress() {
   const s = getState();
   const allIds = Object.values(ITEMS).flat();
   const done = allIds.filter(id => s[id]).length;
-  const total = allIds.length;
-  const pct = Math.round(done / total * 100) || 0;
+  const pct = Math.round(done / allIds.length * 100) || 0;
   document.getElementById('pct').textContent = pct + '%';
   document.getElementById('fill').style.width = pct + '%';
 }
@@ -149,11 +130,11 @@ function switchTab(name, btn) {
   document.getElementById('panel-' + name).classList.add('active');
 }
 
-function resetAll() { if (confirm('Tout effacer ?')) { localStorage.removeItem('checklist_boileau'); location.reload(); } }
+function resetAll() { if(confirm('Reset?')){ localStorage.removeItem('checklist_boileau'); location.reload(); } }
 
 window.onload = () => {
   const s = getState();
-  document.querySelectorAll('.cl-item').forEach(el => { if (s[el.dataset.id]) el.classList.add('checked'); });
+  document.querySelectorAll('.cl-item').forEach(el => { if(s[el.dataset.id]) el.classList.add('checked'); });
   updateProgress();
 };
 </script>
