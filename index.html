@@ -7,172 +7,75 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sage:       #7D9B76;
-  --sage-dark:  #5A7554;
-  --sage-light: #B5CCAF;
-  --sage-pale:  #EAF0E8;
-  --beige:      #F5EFE4;
-  --beige-dark: #E8DCCA;
-  --cream:      #FDFAF5;
-  --terra:      #C17F5E;
-  --terra-light:#F2E0D4;
-  --umber:      #6B4F3A;
-  --bark:       #3D2B1F;
-  --fog:        #8E9E8A;
-  --white:      #FFFFFF;
-  --font-d: 'Playfair Display', Georgia, serif;
-  --font-b: 'Jost', sans-serif;
+  --sage: #7D9B76; --sage-dark: #5A7554; --sage-light: #B5CCAF; --sage-pale: #EAF0E8;
+  --beige: #F5EFE4; --beige-dark: #E8DCCA; --cream: #FDFAF5; --terra: #C17F5E;
+  --terra-light:#F2E0D4; --umber: #6B4F3A; --bark: #3D2B1F; --fog: #8E9E8A; --white: #FFFFFF;
+  --font-d: 'Playfair Display', Georgia, serif; --font-b: 'Jost', sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { background: var(--cream); color: var(--bark); font-family: var(--font-b); font-weight: 300; min-height: 100vh; }
 
-/* ── NOUVELLE BARRE DE RETOUR ── */
-.top-nav {
-  background: var(--white);
-  border-bottom: 1px solid var(--beige-dark);
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  justify-content: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.back-btn {
-  text-decoration: none;
-  color: var(--sage-dark);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.5rem 1.2rem;
-  border: 1px solid var(--sage-light);
-  border-radius: 2rem;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.back-btn:hover {
-  background: var(--sage-pale);
-  transform: translateY(-1px);
-}
+/* ── BARRE DE RETOUR ── */
+.top-nav { background: var(--white); border-bottom: 1px solid var(--beige-dark); padding: 0.8rem; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; }
+.back-btn { text-decoration: none; color: var(--sage-dark); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 1.2rem; border: 1px solid var(--sage-light); border-radius: 2rem; transition: 0.3s; }
+.back-btn:hover { background: var(--sage-pale); }
 
 /* ── HEADER ── */
-.header {
-  background: var(--bark);
-  padding: 2rem 1.5rem 0;
-  text-align: center;
-  position: relative; overflow: hidden;
-}
-.header::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 80% at 20% 60%, rgba(125,155,118,.3), transparent 60%),
-              radial-gradient(ellipse 50% 50% at 80% 30%, rgba(193,127,94,.2), transparent 55%);
-}
+.header { background: var(--bark); padding: 2rem 1.5rem 0; text-align: center; position: relative; overflow: hidden; }
 .header-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-.header-tag { display: inline-block; font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--sage-light); border: 1px solid rgba(181,204,175,.35); padding: .3rem 1rem; border-radius: 2rem; margin-bottom: 1rem; }
-.header h1 { font-family: var(--font-d); font-size: clamp(2rem,6vw,3.5rem); font-weight: 400; color: var(--beige); line-height: 1.1; margin-bottom: .4rem; }
+.header h1 { font-family: var(--font-d); font-size: clamp(2rem,6vw,3.5rem); color: var(--beige); font-weight: 400; }
 .header h1 em { color: var(--sage-light); font-style: italic; }
-.header-addr { font-size: .85rem; color: var(--fog); margin-bottom: 2rem; letter-spacing: .05em; }
 
 /* ── PROGRESS BAR ── */
-.progress-wrap {
-  background: rgba(255,255,255,.07);
-  border-radius: 20px 20px 0 0;
-  padding: 1.5rem 2rem 0;
-  margin-top: .5rem;
-}
+.progress-wrap { background: rgba(255,255,255,.07); border-radius: 20px 20px 0 0; padding: 1.5rem 2rem 1rem; margin-top: 1rem; }
 .progress-labels { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: .6rem; }
 .progress-pct { font-size: 2.2rem; font-weight: 600; color: var(--sage-light); font-family: var(--font-d); }
-.progress-txt { font-size: .8rem; color: var(--fog); text-align: right; }
-.progress-track {
-  height: 10px; background: rgba(255,255,255,.1); border-radius: 10px; overflow: hidden;
-  margin-bottom: 1.2rem;
-}
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--sage-dark), var(--sage-light)); border-radius: 10px; transition: width .5s ease; width: 0%; }
+.progress-track { height: 10px; background: rgba(255,255,255,.1); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--sage-dark), var(--sage-light)); width: 0%; transition: 0.5s; }
 
-/* ── TABS (Menu interne) ── */
-.tabs {
-  display: flex; border-bottom: 1px solid var(--beige-dark);
-  background: var(--white); position: sticky; top: 52px; z-index: 50;
-  overflow-x: auto; scrollbar-width: none;
-}
-.tabs::-webkit-scrollbar { display: none; }
-.tab {
-  flex: 1; min-width: 100px; padding: 1rem .5rem; text-align: center; cursor: pointer;
-  font-family: var(--font-b); font-size: .78rem; font-weight: 400; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--fog); border: none; background: none;
-  border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
-}
-.tab:hover { color: var(--sage-dark); }
-.tab.active { color: var(--sage-dark); border-bottom-color: var(--sage); font-weight: 500; }
-.tab .tab-count { display: inline-block; background: var(--sage-pale); color: var(--sage-dark); font-size: .65rem; padding: .1rem .4rem; border-radius: 2rem; margin-left: .3rem; font-weight: 600; }
-.tab.active .tab-count { background: var(--sage); color: var(--white); }
+/* ── TABS ── */
+.tabs { display: flex; border-bottom: 1px solid var(--beige-dark); background: var(--white); position: sticky; top: 51px; z-index: 50; overflow-x: auto; }
+.tab { flex: 1; padding: 1rem; text-align: center; cursor: pointer; font-size: .75rem; text-transform: uppercase; color: var(--fog); border: none; background: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+.tab.active { color: var(--sage-dark); border-bottom-color: var(--sage); font-weight: 600; }
 
 /* ── PANELS ── */
 .panels { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 .panel { display: none; }
 .panel.active { display: block; animation: fadeIn .3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-/* ── CHECKLIST ITEMS ── */
-.cl-item {
-  display: flex; align-items: flex-start; gap: 1rem;
-  background: var(--white); border: 1px solid var(--beige-dark);
-  border-radius: 12px; padding: .9rem 1.1rem; margin-bottom: .55rem;
-  cursor: pointer; transition: all .2s;
-}
-.cl-item:hover { background: var(--sage-pale); border-color: var(--sage-light); }
-.cl-item.checked { background: var(--sage-pale); opacity: .75; }
-.cl-item.checked .cl-text { text-decoration: line-through; color: var(--fog); }
+.cl-group-label { font-size: .7rem; font-weight: 600; text-transform: uppercase; color: var(--sage-dark); margin: 1.5rem 0 .8rem; display: flex; align-items: center; gap: 10px; }
+.cl-group-label::after { content: ''; flex: 1; height: 1px; background: var(--beige-dark); }
 
-.cl-checkbox {
-  width: 22px; height: 22px; flex-shrink: 0;
-  border: 2px solid var(--beige-dark); border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  transition: all .2s; background: var(--white);
-}
+/* ── ITEMS ── */
+.cl-item { display: flex; align-items: flex-start; gap: 1rem; background: var(--white); border: 1px solid var(--beige-dark); border-radius: 12px; padding: 1rem; margin-bottom: .6rem; cursor: pointer; transition: 0.2s; }
+.cl-item.checked { background: var(--sage-pale); border-color: var(--sage-light); }
+.cl-checkbox { width: 22px; height: 22px; border: 2px solid var(--beige-dark); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--white); }
 .cl-item.checked .cl-checkbox { background: var(--sage); border-color: var(--sage); }
-.cl-check-icon { opacity: 0; color: var(--white); font-size: .8rem; }
-.cl-item.checked .cl-check-icon { opacity: 1; }
-
-.cl-text { font-size: .92rem; color: var(--bark); line-height: 1.45; }
+.cl-check-icon { color: var(--white); display: none; font-size: 0.8rem; }
+.cl-item.checked .cl-check-icon { display: block; }
+.cl-text { font-size: .92rem; color: var(--bark); }
 .cl-en { display: block; font-size: .78rem; color: var(--fog); font-style: italic; }
 
-/* ── SIGNATURE BOX ── */
-.sig-box { background: var(--white); border: 1px solid var(--beige-dark); border-radius: 16px; padding: 1.5rem; margin-top: 2rem; }
-.sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-@media(max-width:480px) { .sig-grid { grid-template-columns: 1fr; } .tabs { top: 48px; } }
+.reset-btn { display: block; margin: 2rem auto; padding: 0.6rem 1.5rem; background: none; border: 1px solid var(--beige-dark); border-radius: 2rem; color: var(--fog); cursor: pointer; }
 
-.sig-field input, .sig-field textarea {
-  width: 100%; padding: .6rem; border: 1px solid var(--beige-dark); border-radius: 8px; background: var(--cream);
-}
-
-.reset-btn { display: block; margin: 1.5rem auto 0; padding: .6rem 1.4rem; background: none; border: 1px solid var(--beige-dark); border-radius: 2rem; color: var(--fog); cursor: pointer; }
-
-.foot { text-align: center; padding: 2rem; font-size: .8rem; color: var(--fog); }
+@media(max-width:480px) { .tabs { top: 47px; } }
 </style>
 </head>
 <body>
 
 <nav class="top-nav">
-  <a href="https://eliascallaert-ui.github.io/House-Guide/" class="back-btn">
-    🏠 Retour au Guide de la Maison
-  </a>
+  <a href="https://eliascallaert-ui.github.io/House-Guide/" class="back-btn">🏠 Retour au Guide</a>
 </nav>
 
 <div class="header">
   <div class="header-content">
-    <span class="header-tag">Avenue Boileau 3 · Etterbeek · 1040</span>
-    <h1>Check-list<br><em>Locataire</em></h1>
-    <p class="header-addr">Appartement 1 · 1er étage · Tenant Checklist</p>
-
+    <h1>Check-list <em>Locataire</em></h1>
     <div class="progress-wrap">
       <div class="progress-labels">
         <span class="progress-pct" id="pct">0%</span>
-        <span class="progress-txt"><span id="done">0</span> / <span id="total">0</span> complétées</span>
+        <span style="color:var(--fog); font-size:0.8rem">Progression du séjour</span>
       </div>
       <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
     </div>
@@ -180,66 +83,45 @@ body { background: var(--cream); color: var(--bark); font-family: var(--font-b);
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('arrivee',this)">🏠 Arrivée <span class="tab-count" id="cnt-arrivee">0</span></button>
-  <button class="tab" onclick="switchTab('vie',this)">🌀 Vie Quotidienne <span class="tab-count" id="cnt-vie">0</span></button>
-  <button class="tab" onclick="switchTab('depart',this)">🏁 Départ <span class="tab-count" id="cnt-depart">0</span></button>
-  <button class="tab" onclick="switchTab('info',this)">ℹ️ Infos</button>
+  <button class="tab active" onclick="switchTab('arrivee',this)">🏠 Arrivée</button>
+  <button class="tab" onclick="switchTab('vie',this)">🌀 Vie</button>
+  <button class="tab" onclick="switchTab('depart',this)">🏁 Départ</button>
 </div>
 
 <div class="panels">
+  <!-- ARRIVÉE -->
   <div class="panel active" id="panel-arrivee">
-    <div class="cl-group">
-      <div class="cl-item" onclick="toggle(this)" data-id="a1">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Les 2 clés reçues</span><span class="cl-en">Both keys received</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a2">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">WiFi connecté</span><span class="cl-en">WiFi connected</span></div>
-      </div>
-    </div>
-    </div>
+    <div class="cl-group-label">🔑 Clés & Accès</div>
+    <div class="cl-item" onclick="toggle(this)" data-id="a1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Les 2 clés reçues</span><span class="cl-en">Both keys received</span></div></div>
+    <div class="cl-item" onclick="toggle(this)" data-id="a2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">WiFi connecté (LANgoustine)</span><span class="cl-en">WiFi connected</span></div></div>
+    
+    <div class="cl-group-label">🛏️ Logement</div>
+    <div class="cl-item" onclick="toggle(this)" data-id="a3"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Chambre vérifiée</span><span class="cl-en">Room checked</span></div></div>
+    <div class="cl-item" onclick="toggle(this)" data-id="a4"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Tour de l'appartement effectué</span><span class="cl-en">Tour of apartment done</span></div></div>
+  </div>
 
+  <!-- VIE -->
   <div class="panel" id="panel-vie">
-    <div class="cl-item" onclick="toggle(this)" data-id="v1">
-      <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-      <div class="cl-text-wrap"><span class="cl-text">Cuisine propre</span><span class="cl-en">Kitchen clean</span></div>
-    </div>
+    <div class="cl-group-label">🍳 Quotidien</div>
+    <div class="cl-item" onclick="toggle(this)" data-id="v1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Cuisine nettoyée</span><span class="cl-en">Kitchen cleaned</span></div></div>
+    <div class="cl-item" onclick="toggle(this)" data-id="v2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Poubelles triées</span><span class="cl-en">Waste sorted</span></div></div>
   </div>
 
+  <!-- DÉPART -->
   <div class="panel" id="panel-depart">
-    <div class="cl-item" onclick="toggle(this)" data-id="d1">
-      <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-      <div class="cl-text-wrap"><span class="cl-text">Clés rendues</span><span class="cl-en">Keys returned</span></div>
-    </div>
-  </div>
-
-  <div class="panel" id="panel-info">
-    <p>Contacts: Eva & Elias</p>
+    <div class="cl-group-label">🏁 Fin de séjour</div>
+    <div class="cl-item" onclick="toggle(this)" data-id="d1"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Frigo vidé</span><span class="cl-en">Fridge empty</span></div></div>
+    <div class="cl-item" onclick="toggle(this)" data-id="d2"><div class="cl-checkbox"><span class="cl-check-icon">✓</span></div><div class="cl-text-wrap"><span class="cl-text">Clés rendues à Eva ou Elias</span><span class="cl-en">Keys returned</span></div></div>
   </div>
 </div>
 
-<button class="reset-btn" onclick="resetAll()">↺ Réinitialiser</button>
-
-<div class="foot">
-  <strong>Avenue Boileau 3 · 1040 Etterbeek</strong>
-</div>
+<button class="reset-btn" onclick="resetAll()">↺ Réinitialiser la checklist</button>
 
 <script>
-// Liste complète de tes IDs pour que la barre de progression soit juste
-const ITEMS = {
-  arrivee: ['a1','a2','a3','a4','a5','a6','a7','a8','a9','a10','a11','a12','a13','a14'],
-  vie:     ['v1','v2','v3','v4','v5','v6','v7','v8','v9'],
-  depart:  ['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12'],
-};
+const ITEMS = { arrivee: ['a1','a2','a3','a4'], vie: ['v1','v2'], depart: ['d1','d2'] };
 
-function getState() { 
-  try { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); } catch { return {}; }
-}
-
-function setState(s) { 
-  try { localStorage.setItem('checklist_boileau', JSON.stringify(s)); } catch {}
-}
+function getState() { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); }
+function setState(s) { localStorage.setItem('checklist_boileau', JSON.stringify(s)); }
 
 function toggle(el) {
   const id = el.dataset.id;
@@ -252,18 +134,12 @@ function toggle(el) {
 
 function updateProgress() {
   const s = getState();
-  const allIds = [...ITEMS.arrivee, ...ITEMS.vie, ...ITEMS.depart];
+  const allIds = Object.values(ITEMS).flat();
   const done = allIds.filter(id => s[id]).length;
   const total = allIds.length;
   const pct = Math.round(done / total * 100) || 0;
-  
   document.getElementById('pct').textContent = pct + '%';
   document.getElementById('fill').style.width = pct + '%';
-  
-  // Met à jour les compteurs sur les onglets
-  if(document.getElementById('cnt-arrivee')) document.getElementById('cnt-arrivee').textContent = ITEMS.arrivee.filter(id => s[id]).length + '/' + ITEMS.arrivee.length;
-  if(document.getElementById('cnt-vie')) document.getElementById('cnt-vie').textContent = ITEMS.vie.filter(id => s[id]).length + '/' + ITEMS.vie.length;
-  if(document.getElementById('cnt-depart')) document.getElementById('cnt-depart').textContent = ITEMS.depart.filter(id => s[id]).length + '/' + ITEMS.depart.length;
 }
 
 function switchTab(name, btn) {
@@ -273,19 +149,13 @@ function switchTab(name, btn) {
   document.getElementById('panel-' + name).classList.add('active');
 }
 
-function resetAll() {
-  if (confirm('Réinitialiser toute la checklist ?')) {
-    localStorage.removeItem('checklist_boileau');
-    location.reload();
-  }
-}
+function resetAll() { if (confirm('Tout effacer ?')) { localStorage.removeItem('checklist_boileau'); location.reload(); } }
 
-// Au chargement, on applique l'état sauvegardé
 window.onload = () => {
   const s = getState();
-  document.querySelectorAll('.cl-item').forEach(el => {
-    if (s[el.dataset.id]) el.classList.add('checked');
-  });
+  document.querySelectorAll('.cl-item').forEach(el => { if (s[el.dataset.id]) el.classList.add('checked'); });
   updateProgress();
 };
 </script>
+</body>
+</html>
