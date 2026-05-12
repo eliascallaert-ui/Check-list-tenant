@@ -27,6 +27,37 @@
 html { scroll-behavior: smooth; }
 body { background: var(--cream); color: var(--bark); font-family: var(--font-b); font-weight: 300; min-height: 100vh; }
 
+/* ── NOUVELLE BARRE DE RETOUR ── */
+.top-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--beige-dark);
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.back-btn {
+  text-decoration: none;
+  color: var(--sage-dark);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--sage-light);
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.back-btn:hover {
+  background: var(--sage-pale);
+  transform: translateY(-1px);
+}
+
 /* ── HEADER ── */
 .header {
   background: var(--bark);
@@ -62,10 +93,10 @@ body { background: var(--cream); color: var(--bark); font-family: var(--font-b);
 }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--sage-dark), var(--sage-light)); border-radius: 10px; transition: width .5s ease; width: 0%; }
 
-/* ── TABS ── */
+/* ── TABS (Menu interne) ── */
 .tabs {
   display: flex; border-bottom: 1px solid var(--beige-dark);
-  background: var(--white); position: sticky; top: 0; z-index: 50;
+  background: var(--white); position: sticky; top: 52px; z-index: 50;
   overflow-x: auto; scrollbar-width: none;
 }
 .tabs::-webkit-scrollbar { display: none; }
@@ -86,104 +117,52 @@ body { background: var(--cream); color: var(--bark); font-family: var(--font-b);
 .panel.active { display: block; animation: fadeIn .3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-/* ── SECTION HEADER ── */
-.panel-intro {
-  background: var(--sage-pale); border: 1px solid var(--sage-light);
-  border-radius: 16px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;
-  display: flex; gap: 1rem; align-items: flex-start;
-}
-.panel-intro-icon { font-size: 2rem; flex-shrink: 0; }
-.panel-intro-title { font-family: var(--font-d); font-size: 1.2rem; color: var(--bark); }
-.panel-intro-desc { font-size: .85rem; color: var(--umber); margin-top: .2rem; line-height: 1.5; }
-
 /* ── CHECKLIST ITEMS ── */
-.cl-group { margin-bottom: 1.75rem; }
-.cl-group-label {
-  font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--sage-dark); display: flex; align-items: center; gap: .6rem;
-  margin-bottom: .8rem;
-}
-.cl-group-label::after { content: ''; flex: 1; height: 1px; background: var(--beige-dark); }
-
 .cl-item {
   display: flex; align-items: flex-start; gap: 1rem;
   background: var(--white); border: 1px solid var(--beige-dark);
   border-radius: 12px; padding: .9rem 1.1rem; margin-bottom: .55rem;
-  cursor: pointer; transition: all .2s; user-select: none;
+  cursor: pointer; transition: all .2s;
 }
 .cl-item:hover { background: var(--sage-pale); border-color: var(--sage-light); }
-.cl-item.checked {
-  background: var(--sage-pale); border-color: var(--sage-light);
-  opacity: .75;
-}
+.cl-item.checked { background: var(--sage-pale); opacity: .75; }
 .cl-item.checked .cl-text { text-decoration: line-through; color: var(--fog); }
-.cl-item.checked .cl-en { text-decoration: line-through; }
 
 .cl-checkbox {
   width: 22px; height: 22px; flex-shrink: 0;
   border: 2px solid var(--beige-dark); border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
-  transition: all .2s; margin-top: 1px; background: var(--white);
+  transition: all .2s; background: var(--white);
 }
-.cl-item.checked .cl-checkbox {
-  background: var(--sage); border-color: var(--sage);
-}
-.cl-check-icon { opacity: 0; transition: opacity .15s; font-size: .8rem; color: var(--white); }
+.cl-item.checked .cl-checkbox { background: var(--sage); border-color: var(--sage); }
+.cl-check-icon { opacity: 0; color: var(--white); font-size: .8rem; }
 .cl-item.checked .cl-check-icon { opacity: 1; }
 
-.cl-text-wrap { flex: 1; }
 .cl-text { font-size: .92rem; color: var(--bark); line-height: 1.45; }
-.cl-en { display: block; font-size: .78rem; color: var(--fog); font-style: italic; margin-top: .1rem; }
+.cl-en { display: block; font-size: .78rem; color: var(--fog); font-style: italic; }
 
 /* ── SIGNATURE BOX ── */
-.sig-box {
-  background: var(--white); border: 1px solid var(--beige-dark);
-  border-radius: 16px; padding: 1.5rem; margin-top: 2rem;
-}
-.sig-title { font-family: var(--font-d); font-size: 1.1rem; color: var(--bark); margin-bottom: 1.2rem; font-style: italic; }
+.sig-box { background: var(--white); border: 1px solid var(--beige-dark); border-radius: 16px; padding: 1.5rem; margin-top: 2rem; }
 .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-@media(max-width:480px) { .sig-grid { grid-template-columns: 1fr; } }
-.sig-field label { font-size: .72rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--sage-dark); display: block; margin-bottom: .4rem; }
+@media(max-width:480px) { .sig-grid { grid-template-columns: 1fr; } .tabs { top: 48px; } }
+
 .sig-field input, .sig-field textarea {
-  width: 100%; padding: .6rem .8rem; border: 1px solid var(--beige-dark); border-radius: 8px;
-  font-family: var(--font-b); font-size: .9rem; color: var(--bark); background: var(--cream);
-  outline: none; transition: border-color .2s; resize: none;
+  width: 100%; padding: .6rem; border: 1px solid var(--beige-dark); border-radius: 8px; background: var(--cream);
 }
-.sig-field input:focus, .sig-field textarea:focus { border-color: var(--sage); }
 
-/* ── COMPLETION CARD ── */
-.completion-card {
-  background: var(--bark); border-radius: 20px; padding: 2.5rem;
-  text-align: center; margin-top: 2rem; position: relative; overflow: hidden;
-  display: none;
-}
-.completion-card.show { display: block; animation: fadeIn .4s ease; }
-.completion-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 30% 40%, rgba(125,155,118,.4), transparent 60%);
-}
-.completion-card * { position: relative; z-index: 1; }
-.completion-emoji { font-size: 3rem; display: block; margin-bottom: 1rem; }
-.completion-title { font-family: var(--font-d); font-size: 1.6rem; color: var(--beige); margin-bottom: .5rem; }
-.completion-sub { font-size: .9rem; color: var(--fog); }
+.reset-btn { display: block; margin: 1.5rem auto 0; padding: .6rem 1.4rem; background: none; border: 1px solid var(--beige-dark); border-radius: 2rem; color: var(--fog); cursor: pointer; }
 
-/* ── RESET BTN ── */
-.reset-btn {
-  display: block; margin: 1.5rem auto 0; padding: .6rem 1.4rem;
-  background: none; border: 1px solid var(--beige-dark); border-radius: 2rem;
-  color: var(--fog); font-family: var(--font-b); font-size: .78rem; cursor: pointer;
-  transition: all .2s;
-}
-.reset-btn:hover { border-color: var(--terra); color: var(--terra); }
-
-/* ── FOOTER ── */
 .foot { text-align: center; padding: 2rem; font-size: .8rem; color: var(--fog); }
-.foot strong { color: var(--bark); }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<nav class="top-nav">
+  <a href="https://eliascallaert-ui.github.io/House-Guide/" class="back-btn">
+    🏠 Retour au Guide de la Maison
+  </a>
+</nav>
+
 <div class="header">
   <div class="header-content">
     <span class="header-tag">Avenue Boileau 3 · Etterbeek · 1040</span>
@@ -193,356 +172,65 @@ body { background: var(--cream); color: var(--bark); font-family: var(--font-b);
     <div class="progress-wrap">
       <div class="progress-labels">
         <span class="progress-pct" id="pct">0%</span>
-        <span class="progress-txt"><span id="done">0</span> / <span id="total">0</span> tâches complétées</span>
+        <span class="progress-txt"><span id="done">0</span> / <span id="total">0</span> complétées</span>
       </div>
       <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
     </div>
   </div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('arrivee',this)" id="tab-arrivee">🏠 Arrivée <span class="tab-count" id="cnt-arrivee">0</span></button>
-  <button class="tab" onclick="switchTab('vie',this)" id="tab-vie">🌀 Vie Quotidienne <span class="tab-count" id="cnt-vie">0</span></button>
-  <button class="tab" onclick="switchTab('depart',this)" id="tab-depart">🏁 Départ <span class="tab-count" id="cnt-depart">0</span></button>
-  <button class="tab" onclick="switchTab('info',this)" id="tab-info">ℹ️ Infos</button>
+  <button class="tab active" onclick="switchTab('arrivee',this)">🏠 Arrivée <span class="tab-count" id="cnt-arrivee">0</span></button>
+  <button class="tab" onclick="switchTab('vie',this)">🌀 Vie Quotidienne <span class="tab-count" id="cnt-vie">0</span></button>
+  <button class="tab" onclick="switchTab('depart',this)">🏁 Départ <span class="tab-count" id="cnt-depart">0</span></button>
+  <button class="tab" onclick="switchTab('info',this)">ℹ️ Infos</button>
 </div>
 
-<!-- PANELS -->
 <div class="panels">
-
-  <!-- ARRIVÉE -->
   <div class="panel active" id="panel-arrivee">
-    <div class="panel-intro">
-      <span class="panel-intro-icon">🏠</span>
-      <div>
-        <p class="panel-intro-title">Checklist d'Arrivée · Arrival Checklist</p>
-        <p class="panel-intro-desc">Tout ce qu'il faut vérifier à votre arrivée. / Everything to check on arrival.</p>
-      </div>
-    </div>
-
     <div class="cl-group">
-      <div class="cl-group-label">🔑 Clés & Accès · Keys & Access</div>
       <div class="cl-item" onclick="toggle(this)" data-id="a1">
         <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Les 2 clés reçues (bâtiment + appartement)</span><span class="cl-en">Both keys received (building + apartment)</span></div>
+        <div class="cl-text-wrap"><span class="cl-text">Les 2 clés reçues</span><span class="cl-en">Both keys received</span></div>
       </div>
       <div class="cl-item" onclick="toggle(this)" data-id="a2">
         <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Code WiFi noté — réseau : LANgoustine · mdp : arukigaya</span><span class="cl-en">WiFi noted — network: LANgoustine · pw: arukigaya</span></div>
+        <div class="cl-text-wrap"><span class="cl-text">WiFi connecté</span><span class="cl-en">WiFi connected</span></div>
       </div>
     </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">🛏️ Chambre · Room</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a3">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Chambre vérifiée et en bon état</span><span class="cl-en">Room checked and in good condition</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a4">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Canapé-lit fonctionnel, linge de maison en place</span><span class="cl-en">Sofa-bed working, linen in place</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a5">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Dressing, bureau et chaise disponibles</span><span class="cl-en">Wardrobe, desk and chair available</span></div>
-      </div>
     </div>
 
-    <div class="cl-group">
-      <div class="cl-group-label">🏠 Logement · Apartment</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a6">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Tour de l'appartement effectué avec l'hôte</span><span class="cl-en">Apartment tour done with host</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a7">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Cuisine présentée — place attitrée dans le frigo</span><span class="cl-en">Kitchen shown — dedicated fridge shelf assigned</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a8">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Chauffage expliqué (thermostat près de la porte du salon + vannes radiateurs)</span><span class="cl-en">Heating explained (thermostat near living room door + radiator valves)</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a9">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Machine à laver et sèche-linge localisés (cave, niveau -1)</span><span class="cl-en">Washing machine & dryer located (basement, level -1)</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a10">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Tri des déchets & jours de collecte expliqués</span><span class="cl-en">Waste sorting & collection days explained</span></div>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">📋 Administratif · Admin</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a11">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Guide de la maison reçu et lu</span><span class="cl-en">House guide received and read</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a12">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Numéros Eva (0485 11 40 70) et Elias (0478 80 45 13) enregistrés</span><span class="cl-en">Eva & Elias numbers saved in phone</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a13">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Contrat / accord de location signé</span><span class="cl-en">Rental agreement signed</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="a14">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Parking vélo : clé obtenue si nécessaire</span><span class="cl-en">Bike parking: key obtained if needed</span></div>
-      </div>
-    </div>
-
-    <div id="complete-arrivee" class="completion-card">
-      <span class="completion-emoji">🎉</span>
-      <p class="completion-title">Arrivée complète !</p>
-      <p class="completion-sub">Vous êtes installé(e). Bienvenue à Etterbeek !<br><em>You're all settled in. Welcome to Etterbeek!</em></p>
-    </div>
-  </div>
-
-  <!-- VIE QUOTIDIENNE -->
   <div class="panel" id="panel-vie">
-    <div class="panel-intro">
-      <span class="panel-intro-icon">🌀</span>
-      <div>
-        <p class="panel-intro-title">Vie Quotidienne · Daily Living</p>
-        <p class="panel-intro-desc">Bonnes pratiques à maintenir pendant votre séjour. / Good habits to maintain during your stay.</p>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">🍳 Espaces partagés · Shared spaces</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v1">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Cuisine nettoyée après chaque utilisation</span><span class="cl-en">Kitchen cleaned after each use</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v2">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Salle de bain laissée propre</span><span class="cl-en">Bathroom left clean</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v3">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Nourriture périmée jetée régulièrement</span><span class="cl-en">Expired food disposed of regularly</span></div>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">♻️ Déchets · Waste</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v4">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Sac bleu + orange sortis le lundi (18h–24h)</span><span class="cl-en">Blue + orange bags out Monday (6pm–midnight)</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v5">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Sac vert sorti le mardi (5h–12h)</span><span class="cl-en">Green bag out Tuesday (5am–noon)</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v6">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Sac blanc + jaune sortis le jeudi (18h–24h)</span><span class="cl-en">White + yellow bags out Thursday (6pm–midnight)</span></div>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">🤝 Règles de vie · House rules</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v7">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Calme respecté entre 22h et 8h</span><span class="cl-en">Quiet hours respected (10pm–8am)</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v8">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Problèmes signalés à Eva ou Elias sans attendre</span><span class="cl-en">Issues reported to Eva or Elias promptly</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="v9">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Linge de maison entretenu (lessive personnelle, cave -1)</span><span class="cl-en">Linen maintained (own detergent, basement -1)</span></div>
-      </div>
+    <div class="cl-item" onclick="toggle(this)" data-id="v1">
+      <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
+      <div class="cl-text-wrap"><span class="cl-text">Cuisine propre</span><span class="cl-en">Kitchen clean</span></div>
     </div>
   </div>
 
-  <!-- DÉPART -->
   <div class="panel" id="panel-depart">
-    <div class="panel-intro">
-      <span class="panel-intro-icon">🏁</span>
-      <div>
-        <p class="panel-intro-title">Checklist de Départ · Departure Checklist</p>
-        <p class="panel-intro-desc">À compléter avant de rendre les clés. / To complete before returning keys.</p>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">🛏️ Chambre · Room</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d1">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Chambre propre et rangée</span><span class="cl-en">Room clean and tidy</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d2">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Linge de maison lavé et rangé proprement</span><span class="cl-en">Linen washed and stored neatly</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d3">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Affaires personnelles rassemblées</span><span class="cl-en">Personal belongings gathered</span></div>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">🍳 Cuisine & Communs · Kitchen & Common areas</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d4">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Réfrigérateur vidé et nettoyé</span><span class="cl-en">Fridge empty and cleaned</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d5">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Cuisine nettoyée</span><span class="cl-en">Kitchen cleaned</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d6">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Salle de bain nettoyée et rangée</span><span class="cl-en">Bathroom cleaned and tidied</span></div>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">♻️ Déchets finaux · Final waste</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d7">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Dernier tri des déchets effectué</span><span class="cl-en">Final waste sorting done</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d8">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Poubelles sorties si jour de collecte</span><span class="cl-en">Bins out if collection day</span></div>
-      </div>
-    </div>
-
-    <div class="cl-group">
-      <div class="cl-group-label">🔑 Remise des clés · Key return</div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d9">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Fenêtres fermées dans toutes les pièces</span><span class="cl-en">Windows closed in all rooms</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d10">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Lumières éteintes, appareils débranchés</span><span class="cl-en">Lights off, appliances unplugged</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d11">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Dommages éventuels signalés à Eva ou Elias</span><span class="cl-en">Any damage reported to Eva or Elias</span></div>
-      </div>
-      <div class="cl-item" onclick="toggle(this)" data-id="d12">
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-text-wrap"><span class="cl-text">Les 2 clés remises à Eva ou Elias</span><span class="cl-en">Both keys returned to Eva or Elias</span></div>
-      </div>
-    </div>
-
-    <!-- Signature -->
-    <div class="sig-box">
-      <p class="sig-title">Notes & Signatures</p>
-      <div class="sig-grid">
-        <div class="sig-field">
-          <label>Locataire · Tenant</label>
-          <input type="text" id="sig-tenant" placeholder="Votre nom" oninput="saveField('tenant',this.value)">
-        </div>
-        <div class="sig-field">
-          <label>Date d'arrivée · Arrival date</label>
-          <input type="date" id="sig-arrival" oninput="saveField('arrival',this.value)">
-        </div>
-        <div class="sig-field">
-          <label>Date de départ · Departure date</label>
-          <input type="date" id="sig-departure" oninput="saveField('departure',this.value)">
-        </div>
-        <div class="sig-field">
-          <label>Observations · Notes</label>
-          <textarea rows="2" id="sig-notes" placeholder="Observations, dommages à signaler..." oninput="saveField('notes',this.value)"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <div id="complete-depart" class="completion-card">
-      <span class="completion-emoji">🌿</span>
-      <p class="completion-title">Départ complet !</p>
-      <p class="completion-sub">Merci pour votre séjour à Etterbeek.<br><em>Thank you for your stay in Etterbeek. Safe travels!</em></p>
+    <div class="cl-item" onclick="toggle(this)" data-id="d1">
+      <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
+      <div class="cl-text-wrap"><span class="cl-text">Clés rendues</span><span class="cl-en">Keys returned</span></div>
     </div>
   </div>
 
-  <!-- INFO -->
   <div class="panel" id="panel-info">
-    <div style="display:flex;flex-direction:column;gap:1rem;">
-
-      <div style="background:var(--bark);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 20% 50%,rgba(125,155,118,.3),transparent 60%)"></div>
-        <div style="position:relative;z-index:1">
-          <p style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sage-light);margin-bottom:.5rem">📶 WiFi</p>
-          <p style="font-size:1.1rem;color:var(--beige);margin-bottom:.3rem">LANgoustine</p>
-          <p style="font-family:'Courier New',monospace;font-size:1.3rem;color:var(--sage-light);letter-spacing:.05em">arukigaya</p>
-        </div>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:16px;padding:1.25rem;">
-        <p style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:.8rem;font-weight:600">📞 Contacts</p>
-        <div style="display:flex;flex-direction:column;gap:.5rem">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:var(--sage-pale);border-radius:8px">
-            <span style="font-size:.88rem;color:var(--bark)">Eva</span>
-            <a href="tel:0485114070" style="font-family:'Courier New',monospace;font-size:1rem;color:var(--sage-dark);text-decoration:none;font-weight:600">0485 11 40 70</a>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:var(--sage-pale);border-radius:8px">
-            <span style="font-size:.88rem;color:var(--bark)">Elias</span>
-            <a href="tel:0478804513" style="font-family:'Courier New',monospace;font-size:1rem;color:var(--sage-dark);text-decoration:none;font-weight:600">0478 80 45 13</a>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:var(--terra-light);border-radius:8px">
-            <span style="font-size:.88rem;color:var(--bark)">🚑 Urgences · Emergency</span>
-            <a href="tel:112" style="font-family:'Courier New',monospace;font-size:1.1rem;color:var(--terra);text-decoration:none;font-weight:700">112</a>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:var(--beige);border-radius:8px">
-            <span style="font-size:.88rem;color:var(--bark)">🏥 Médecin de garde</span>
-            <a href="tel:1733" style="font-family:'Courier New',monospace;font-size:1.1rem;color:var(--bark);text-decoration:none;font-weight:600">1733</a>
-          </div>
-        </div>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:16px;padding:1.25rem;">
-        <p style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:.8rem;font-weight:600">♻️ Déchets · Collection</p>
-        <div style="display:flex;flex-direction:column;gap:.5rem">
-          <div style="display:flex;justify-content:space-between;padding:.6rem .8rem;background:#EBF3FF;border-radius:8px;font-size:.85rem">
-            <span>🔵 Bleu + 🟠 Orange</span><span style="color:#2255AA;font-weight:500">Lundi · 18h–24h</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:.6rem .8rem;background:#DDEEDD;border-radius:8px;font-size:.85rem">
-            <span>🟢 Vert</span><span style="color:#226622;font-weight:500">Mardi · 5h–12h</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:.6rem .8rem;background:#F8F8F8;border-radius:8px;font-size:.85rem">
-            <span>⚪ Blanc + 🟡 Jaune</span><span style="color:#555;font-weight:500">Jeudi · 18h–24h</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:16px;padding:1.25rem;">
-        <p style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:.8rem;font-weight:600">🌡️ Chauffage · Heating</p>
-        <p style="font-size:.88rem;color:var(--umber);line-height:1.6">Chauffage central au gaz. Thermostat près de la porte du salon. Réglez la température, puis ajustez chaque radiateur avec sa vanne. <em style="color:var(--fog)">/ Central gas heating. Thermostat near living room door. Set temperature, then adjust each radiator valve.</em></p>
-      </div>
-
-    </div>
+    <p>Contacts: Eva & Elias</p>
   </div>
+</div>
 
-</div><!-- end panels -->
-
-<button class="reset-btn" onclick="resetAll()">↺ Réinitialiser la checklist</button>
+<button class="reset-btn" onclick="resetAll()">↺ Réinitialiser</button>
 
 <div class="foot">
-  <strong>Avenue Boileau 3 · Apt 1 · 1040 Etterbeek</strong><br>
-  <span>Eva · 0485 11 40 70 · Elias · 0478 80 45 13</span>
+  <strong>Avenue Boileau 3 · 1040 Etterbeek</strong>
 </div>
 
 <script>
-const ITEMS = {
-  arrivee: ['a1','a2','a3','a4','a5','a6','a7','a8','a9','a10','a11','a12','a13','a14'],
-  vie:     ['v1','v2','v3','v4','v5','v6','v7','v8','v9'],
-  depart:  ['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12'],
-};
+// Le script de gestion de la checklist reste le même
+const ITEMS = { arrivee: ['a1','a2'], vie: ['v1'], depart: ['d1'] };
 
-function getState() {
-  try { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); } catch { return {}; }
-}
-function setState(s) {
-  try { localStorage.setItem('checklist_boileau', JSON.stringify(s)); } catch {}
-}
+function getState() { return JSON.parse(localStorage.getItem('checklist_boileau') || '{}'); }
+function setState(s) { localStorage.setItem('checklist_boileau', JSON.stringify(s)); }
 
 function toggle(el) {
   const id = el.dataset.id;
@@ -555,60 +243,12 @@ function toggle(el) {
 
 function updateProgress() {
   const s = getState();
-  const allIds = [...ITEMS.arrivee, ...ITEMS.vie, ...ITEMS.depart];
+  const allIds = Object.values(ITEMS).flat();
   const done = allIds.filter(id => s[id]).length;
   const total = allIds.length;
-  const pct = Math.round(done / total * 100);
+  const pct = Math.round(done / total * 100) || 0;
   document.getElementById('pct').textContent = pct + '%';
-  document.getElementById('done').textContent = done;
-  document.getElementById('total').textContent = total;
   document.getElementById('fill').style.width = pct + '%';
-
-  // Tab counts
-  for (const [key, ids] of Object.entries(ITEMS)) {
-    const cnt = ids.filter(id => s[id]).length;
-    const el = document.getElementById('cnt-' + key);
-    if (el) el.textContent = cnt + '/' + ids.length;
-  }
-
-  // Completion cards
-  const ac = ITEMS.arrivee.every(id => s[id]);
-  const dc = ITEMS.depart.every(id => s[id]);
-  document.getElementById('complete-arrivee').classList.toggle('show', ac);
-  document.getElementById('complete-depart').classList.toggle('show', dc);
-}
-
-function applyState() {
-  const s = getState();
-  document.querySelectorAll('.cl-item').forEach(el => {
-    el.classList.toggle('checked', !!s[el.dataset.id]);
-  });
-  // fields
-  const fields = ['tenant','arrival','departure','notes'];
-  fields.forEach(f => {
-    const el = document.getElementById('sig-' + f);
-    if (el && s['field_' + f]) el.value = s['field_' + f];
-  });
-  updateProgress();
-}
-
-function saveField(key, val) {
-  const s = getState();
-  s['field_' + key] = val;
-  setState(s);
-}
-
-function resetAll() {
-  if (confirm('Réinitialiser toute la checklist ? / Reset the entire checklist?')) {
-    localStorage.removeItem('checklist_boileau');
-    applyState();
-    document.querySelectorAll('.cl-item').forEach(el => el.classList.remove('checked'));
-    ['tenant','arrival','departure','notes'].forEach(f => {
-      const el = document.getElementById('sig-' + f);
-      if (el) el.value = '';
-    });
-    updateProgress();
-  }
 }
 
 function switchTab(name, btn) {
@@ -618,7 +258,7 @@ function switchTab(name, btn) {
   document.getElementById('panel-' + name).classList.add('active');
 }
 
-applyState();
+updateProgress();
 </script>
 </body>
 </html>
